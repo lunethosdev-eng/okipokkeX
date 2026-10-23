@@ -7,108 +7,122 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navegación Minimalista -->
-    <header class="navbar">
+    <!-- Fondo Dinámico Motion -->
+    <div class="ambient-glow"></div>
+
+    <!-- Navegación Liquid Glass -->
+    <header class="navbar glass-panel">
         <div class="nav-container">
             <a href="#" class="brand">
-                <img src="logo.png" alt="Pokke Logo" class="brand-icon">
-                <span>POKKE</span>
+                <img src="logo.png" alt="Pokke Logo" class="brand-logo-img">
+                <span class="brand-title">POKKE</span>
             </a>
             <nav class="nav-menu">
-                <a href="#features">Características</a>
-                <a href="#download">Descargar</a>
-                <a href="#versions">Versiones</a>
+                <a href="#features" class="nav-link">Caracteristicas</a>
+                <a href="#download" class="nav-link">Descargar</a>
+                <a href="#versions" class="nav-link">Versiones</a>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-text fade-in">
-            <span class="tag">0.0.1 — ALPHA AVAILABLE</span>
-            <h1>Música en su estado más puro.</h1>
-            <p>Reproducción sin interrupciones, descargas en alta calidad, personalización de perfil e importación directa desde Spotify. Sin anuncios. Sin suscripciones.</p>
+        <div class="hero-content">
+            <div class="badge-pill animate-fade-in">
+                <span class="pulse-dot"></span>
+                <span>ALPHA 0.0.1 — RELEASE ACTIVE</span>
+            </div>
+            <h1 class="hero-title animate-fade-in delay-1">
+                Musica en su estado <span class="text-gradient">mas puro.</span>
+            </h1>
+            <p class="hero-subtitle animate-fade-in delay-2">
+                Reproduccion continua sin anuncios, almacenamiento offline local, personalizacion avanzada de perfil y sincronizacion directa desde Spotify con una interfaz disenada bajo principios de alta precision.
+            </p>
             
-            <div class="cta-group">
-                <a href="#download" class="btn btn-primary" id="main-download-btn">Descargar APK</a>
-                <a href="https://lunethosdev-eng.github.io/Moshii/#/firstpage" class="btn btn-secondary" id="web-app-link" target="_blank">Abrir Web App</a>
+            <div class="hero-actions animate-fade-in delay-3">
+                <a href="#download" class="btn btn-primary">Descargar APK</a>
+                <a href="https://lunethosdev-eng.github.io/Moshii/#/firstpage" class="btn btn-glass" target="_blank">Abrir Web App</a>
             </div>
         </div>
 
-        <!-- Elemento de Arte Gráfico / Motion -->
-        <div class="hero-media fade-in">
-            <div class="vinyl-wrapper">
-                <img src="vinyl.jpg" alt="Pokke Vinyl Art" class="vinyl-record spin-animation">
+        <div class="hero-media animate-float">
+            <div class="vinyl-glass-container">
+                <img src="vinyl.jpg" alt="Pokke Vinyl Art" class="vinyl-real-img spin-slow">
+                <div class="vinyl-center-pin"></div>
             </div>
         </div>
     </section>
 
-    <!-- Características -->
+    <!-- Características Section -->
     <section id="features" class="features-section">
-        <div class="section-header fade-in">
-            <h2>Especificaciones</h2>
-            <p>Diseñado bajo una interfaz limpia, sin distracciones visuales ni comerciales.</p>
+        <div class="section-header">
+            <span class="section-tag">ARQUITECTURA</span>
+            <h2>Especificaciones Tecnicas</h2>
+            <p>Construido para ofrecer rendimiento fluido, optimizacion de bateria y privacidad total.</p>
         </div>
 
-        <div class="grid-container">
-            <div class="grid-card fade-in">
-                <span class="card-num">01</span>
-                <h3>Zero Ads</h3>
-                <p>Una experiencia de escucha ininterrumpida sin banners, clips de audio comerciales ni rastreo de datos.</p>
+        <div class="features-grid">
+            <div class="glass-card feature-card animate-on-scroll">
+                <div class="card-number">01</div>
+                <h3>Cero Anuncios</h3>
+                <p>Experiencia de escucha completamente limpia, sin interrupciones comerciales, banners molestos ni recoleccion de telemetria invasiva.</p>
             </div>
-            <div class="grid-card fade-in">
-                <span class="card-num">02</span>
-                <h3>Offline Mode</h3>
-                <p>Descarga tus pistas y álbumes directamente a tu almacenamiento local para escucharlos en cualquier lugar.</p>
+            <div class="glass-card feature-card animate-on-scroll delay-1">
+                <div class="card-number">02</div>
+                <h3>Modo Offline</h3>
+                <p>Descarga pistas, discos completos y colecciones directamente al almacenamiento interno de tu dispositivo para reproducir sin conexion.</p>
             </div>
-            <div class="grid-card fade-in">
-                <span class="card-num">03</span>
-                <h3>Spotify Sync</h3>
-                <p>Importa tus listas de reproducción personales y biblioteca guardada con un simple proceso de sincronización.</p>
+            <div class="glass-card feature-card animate-on-scroll delay-2">
+                <div class="card-number">03</div>
+                <h3>Sync de Spotify</h3>
+                <p>Importa tus listas de reproduccion historicas y biblioteca guardada de forma automatica mediante un flujo seguro y rapido.</p>
             </div>
-            <div class="grid-card fade-in">
-                <span class="card-num">04</span>
-                <h3>Custom Profile</h3>
-                <p>Ajusta el aspecto visual de tu espacio personal, portadas y métricas de escucha según tus preferencias.</p>
+            <div class="glass-card feature-card animate-on-scroll delay-3">
+                <div class="card-number">04</div>
+                <h3>Perfil Personalizable</h3>
+                <p>Adapta la interfaz visual de tu espacio personal, avatares y preferencias esteticas con total libertad de diseno.</p>
             </div>
         </div>
     </section>
 
-    <!-- Área de Descarga Directa -->
-    <section id="download" class="download-section fade-in">
-        <div class="download-box">
-            <h2>Obtener Pokke</h2>
-            <p>Compatible con dispositivos Android mediante archivo .apk independiente y accesible vía Web en navegadores de iOS/Desktop.</p>
-            <div class="dl-action-container" id="latest-release-target">
-                <!-- Se inyecta la versión vía JS -->
+    <!-- Descarga Section -->
+    <section id="download" class="download-section">
+        <div class="glass-card download-container animate-on-scroll">
+            <div class="download-info">
+                <h2>Obtener Pokke</h2>
+                <p>Disponible para Android en formato APK independiente y optimizado para navegadores moviles de iOS y Desktop mediante Web App.</p>
+            </div>
+            <div class="download-actions" id="latest-download-container">
                 <div class="skeleton-loader"></div>
             </div>
         </div>
     </section>
 
-    <!-- Historial de Releases -->
-    <section id="versions" class="versions-section fade-in">
+    <!-- Versiones Section -->
+    <section id="versions" class="versions-section">
         <div class="section-header">
+            <span class="section-tag">HISTORIAL</span>
             <h2>Registro de Compilaciones</h2>
-            <p>Acceso al historial de versiones previas, parches de seguridad y ramas de pruebas (Beta).</p>
+            <p>Acceso directo a versiones estables previas, parches recientes y compilaciones Beta en curso.</p>
         </div>
 
-        <div class="versions-table" id="releases-list">
-            <!-- Se inyecta el historial vía JS -->
-            <div class="skeleton-loader"></div>
+        <div class="glass-card versions-wrapper animate-on-scroll" id="versions-list">
+            <div class="version-row">
+                <span class="text-muted">Cargando repositorio de releases...</span>
+            </div>
         </div>
     </section>
 
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 POKKE — Desarrollado por lunethosdev-eng.</p>
+        <div class="footer-container">
+            <p>&copy; 2026 POKKE. Disenado y desarrollado por lunethosdev-eng.</p>
             <div class="footer-links">
-                <a href="https://github.com/lunethosdev-eng/okipokkeX" target="_blank">GitHub Repository</a>
+                <a href="https://github.com/lunethosdev-eng/okipokkeX" target="_blank">Repositorio GitHub</a>
             </div>
         </div>
     </footer>
