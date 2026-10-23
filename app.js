@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageButton = $('#language-toggle');
   const translations = {
     es: {
-      navExperience:'Experiencia',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',
+      navExperience:'Experiencia',navCatalog:'Cómo funciona',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',
       eyebrow:'UNA NUEVA FORMA DE ESCUCHAR',heroTitle:'Tu música.<br><span class="muted-heading">Tus reglas.</span>',
       heroBody:'Una experiencia musical diseñada para sentirse tuya. Descubre, organiza y reproduce tus canciones desde un espacio limpio, cuidado y sin distracciones.',
       getApp:'Conoce Pokke',explore:'Explorar la experiencia',androidNote:'Diseñado para Android · APK',yourLibrary:'Tu biblioteca',alwaysYours:'Siempre a tu manera',soundOn:'El sonido, en primer plano',listenYourWay:'Escucha a tu ritmo',scroll:'DESCUBRE POKKE',
@@ -13,14 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
       featuresKicker:'HECHO PARA ESCUCHAR',featuresTitle:'Una experiencia con intención.',featuresIntro:'Cada detalle tiene un propósito: hacer que escuchar música se sienta sencillo otra vez.',
       featureOneTitle:'Tu espacio musical',featureOneBody:'Una biblioteca visual, portadas protagonistas y una interfaz pensada para acompañarte.',featureTwoTitle:'Diseño que respira',featureTwoBody:'Transiciones suaves, superficies translúcidas y modos claro y oscuro para elegir tu ambiente.',featureThreeTitle:'En evolución',featureThreeBody:'Un proyecto independiente que crece con ideas, comentarios y nuevas versiones.',
       previewKicker:'MIRA MÁS DE CERCA',previewTitle:'Cada píxel, con intención.',previewIntro:'Explora algunas pantallas de la aplicación. Toca una imagen para verla completa.',screenPlayer:'Reproductor',screenPlayerSub:'El sonido en el centro',screenLibrary:'Biblioteca',screenLibrarySub:'Todo en su lugar',screenLyrics:'Letras',screenLyricsSub:'Sigue cada momento',screenProfile:'Perfil',screenProfileSub:'Hazlo tuyo',
+      catalogKicker:'MÁS ALLÁ DEL CATÁLOGO',catalogTitle:'Si no la encuentras,<br><span class="serif">la música sigue.</span>',catalogBody:'Pokke incluye una función integrada en la aplicación y en la versión web para gestionar canciones que todavía no aparecen en el catálogo. Busca por título y artista o pega un enlace compatible; el servidor de Pokke procesa la solicitud y prepara la pista para escucharla desde tu experiencia musical.',catalogNote:'Esta capacidad forma parte del producto; no es una función nueva de esta página promocional.',catalogStepOne:'Busca una canción',catalogStepOneBody:'Escribe el nombre del tema y, si lo sabes, el artista para encontrarlo con más precisión.',catalogStepTwo:'O comparte un enlace',catalogStepTwoBody:'Cuando esté disponible, puedes usar un enlace compatible en vez de buscar por texto.',catalogStepThree:'Vuelve a escuchar',catalogStepThreeBody:'La gestión de la solicitud ocurre en la infraestructura del producto, tanto en la app como en la web.',
       listenKicker:'ESCUCHA UNA MUESTRA',listenTitle:'Dale al play.<br><span class="serif">Quédate un rato.</span>',listenBody:'Prueba el reproductor de la web con las pistas incluidas en este proyecto. La disponibilidad depende de que los archivos de audio estén completos.',audioReady:'Preparando reproductor…',nowPlaying:'REPRODUCIENDO EN LA WEB',
       downloadKicker:'TU PRÓXIMO PLAY EMPIEZA AQUÍ',downloadTitle:'Conoce Pokke.',downloadBody:'Consulta las versiones publicadas y descarga el APK desde los lanzamientos oficiales del proyecto.',loadingReleases:'Buscando la última versión…',viewReleases:'Ver lanzamientos ↗',releaseTitle:'Versiones publicadas',allReleases:'Ver todas ↗',loadingVersions:'Cargando versiones…',
       communityKicker:'CRECEMOS CON LA COMUNIDAD',communityTitle:'Las buenas ideas se comparten.',communityBody:'Únete a la conversación, comparte sugerencias y acompaña el desarrollo de Pokke.',discordSoon:'Discord próximamente',discordNote:'El enlace de invitación de Discord se añadirá aquí cuando esté disponible.',
-      aboutKicker:'DE UN ESTUDIO INDEPENDIENTE',aboutTitle:'Pequeño equipo.<br><span class="serif">Grandes ganas de crear.</span>',aboutBody:'Pokke nace de la curiosidad y las ganas de construir una experiencia musical diferente. Detrás del proyecto hay un desarrollador que lleva la dirección y el desarrollo, y un amigo que aporta ideas y comentarios para seguir mejorando.',studioLabel:'Estudio independiente · Proyecto en desarrollo',footerLine:'Hecho con intención por Nakama Studio.',
+      aboutKicker:'QUIÉNES SOMOS',aboutTitle:'Un proyecto pequeño.<br><span class="serif">Una idea que sigue creciendo.</span>',aboutManifesto:'Creemos que una buena experiencia no necesita gritar para hacerse notar. Queremos construir una forma más personal, cuidada y accesible de vivir la música.',ownerTitle:'Desarrollo y dirección',ownerBody:'Pokke está creado y dirigido por un solo desarrollador: me encargo de construir el producto, tomar las decisiones técnicas y convertir las ideas en una experiencia real.',friendTitle:'Un amigo que suma',friendBody:'Un amigo me acompaña con ideas, sugerencias y otra perspectiva para seguir puliendo el proyecto. El equipo es pequeño, pero las ganas de mejorar son grandes.',studioLabel:'Estudio independiente · Proyecto en desarrollo',studioStamp:'HECHO CON INTENCIÓN',footerLine:'Hecho con intención por Nakama Studio.',
       trackUnavailable:'Este archivo de audio está vacío o no se puede reproducir. Sustituye el MP3 de muestra por el archivo completo.',audioError:'No se pudo cargar el audio. Comprueba que el archivo exista y sea válido.',noReleases:'Todavía no hay lanzamientos publicados.',stable:'Estable',beta:'Beta',getApk:'Descargar APK',viewGithub:'Ver en GitHub',releaseFallback:'Consulta las versiones en GitHub Releases.',menuOpen:'Abrir menú',menuClose:'Cerrar menú'
     },
     en: {
-      navExperience:'Experience',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',
+      navExperience:'Experience',navCatalog:'How it works',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',
       eyebrow:'A NEW WAY TO LISTEN',heroTitle:'Your music.<br><span class="muted-heading">Your rules.</span>',
       heroBody:'A music experience designed to feel like yours. Discover, organize, and play your songs in a clean, considered space without distractions.',
       getApp:'Meet Pokke',explore:'Explore the experience',androidNote:'Designed for Android · APK',yourLibrary:'Your library',alwaysYours:'Always your way',soundOn:'Sound takes center stage',listenYourWay:'Listen at your pace',scroll:'DISCOVER POKKE',
@@ -28,10 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
       featuresKicker:'MADE FOR LISTENING',featuresTitle:'An experience with intention.',featuresIntro:'Every detail has a purpose: making listening to music feel simple again.',
       featureOneTitle:'Your music space',featureOneBody:'A visual library, cover art in focus, and an interface designed to be with you.',featureTwoTitle:'A design that breathes',featureTwoBody:'Soft transitions, translucent surfaces, and light and dark modes to set your mood.',featureThreeTitle:'Always evolving',featureThreeBody:'An independent project growing through ideas, feedback, and new releases.',
       previewKicker:'TAKE A CLOSER LOOK',previewTitle:'Every pixel, with purpose.',previewIntro:'Explore a few app screens. Tap an image to view it in full.',screenPlayer:'Player',screenPlayerSub:'Sound at the center',screenLibrary:'Library',screenLibrarySub:'Everything in its place',screenLyrics:'Lyrics',screenLyricsSub:'Follow every moment',screenProfile:'Profile',screenProfileSub:'Make it yours',
+      catalogKicker:'BEYOND THE CATALOG',catalogTitle:'If it is not listed,<br><span class="serif">the music goes on.</span>',catalogBody:'Pokke includes a feature built into both the app and web version for handling songs that are not yet in the catalog. Search by title and artist or paste a supported link; Pokke’s server processes the request and prepares the track for listening within your music experience.',catalogNote:'This capability is part of the product; it is not a new feature of this promotional website.',catalogStepOne:'Search for a song',catalogStepOneBody:'Enter the title and, when known, the artist to find it more precisely.',catalogStepTwo:'Or share a link',catalogStepTwoBody:'When supported, you can use a compatible link instead of a text search.',catalogStepThree:'Press play',catalogStepThreeBody:'The request is handled by the product infrastructure in both the app and web version.',
       listenKicker:'LISTEN TO A SAMPLE',listenTitle:'Press play.<br><span class="serif">Stay a while.</span>',listenBody:'Try the web player with the tracks included in this project. Playback depends on the audio files being complete.',audioReady:'Preparing player…',nowPlaying:'NOW PLAYING ON THE WEB',
       downloadKicker:'YOUR NEXT PLAY STARTS HERE',downloadTitle:'Meet Pokke.',downloadBody:'Browse published versions and download the APK from the project’s official releases.',loadingReleases:'Looking for the latest version…',viewReleases:'View releases ↗',releaseTitle:'Published versions',allReleases:'View all ↗',loadingVersions:'Loading versions…',
       communityKicker:'GROWING WITH THE COMMUNITY',communityTitle:'Good ideas are meant to be shared.',communityBody:'Join the conversation, share suggestions, and follow Pokke’s development.',discordSoon:'Discord coming soon',discordNote:'The Discord invite link will be added here when it is available.',
-      aboutKicker:'FROM AN INDEPENDENT STUDIO',aboutTitle:'Small team.<br><span class="serif">Big reasons to create.</span>',aboutBody:'Pokke comes from curiosity and the desire to build a different music experience. Behind the project is one developer leading its direction and development, alongside a friend who contributes ideas and feedback to help it improve.',studioLabel:'Independent studio · Project in development',footerLine:'Made with intention by Nakama Studio.',
+      aboutKicker:'WHO WE ARE',aboutTitle:'A small project.<br><span class="serif">An idea still growing.</span>',aboutManifesto:'We believe a good experience does not need to shout to stand out. We want to build a more personal, considered, and accessible way to experience music.',ownerTitle:'Development and direction',ownerBody:'Pokke is built and led by one developer: I work on the product, make the technical decisions, and turn ideas into a real experience.',friendTitle:'A friend who adds perspective',friendBody:'A friend contributes ideas, suggestions, and a different perspective to help refine the project. The team is small, but the drive to improve is big.',studioLabel:'Independent studio · Project in development',studioStamp:'MADE WITH INTENTION',footerLine:'Made with intention by Nakama Studio.',
       trackUnavailable:'This audio file is empty or cannot be played. Replace the sample MP3 with the complete audio file.',audioError:'The audio could not be loaded. Check that the file exists and is valid.',noReleases:'There are no published releases yet.',stable:'Stable',beta:'Beta',getApk:'Download APK',viewGithub:'View on GitHub',releaseFallback:'Browse versions on GitHub Releases.',menuOpen:'Open menu',menuClose:'Close menu'
     }
   };
@@ -77,10 +79,44 @@ document.addEventListener('DOMContentLoaded', () => {
   menuBtn.addEventListener('click', () => { const open = nav.classList.toggle('open'); menuBtn.setAttribute('aria-label', open ? t('menuClose') : t('menuOpen')); });
   $$('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-    if(entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); }
-  }), {threshold:.12});
-  $$('.reveal').forEach(el => observer.observe(el));
+    if(entry.isIntersecting) entry.target.classList.add('in-view');
+    else if(entry.target.dataset.replay === 'true') entry.target.classList.remove('in-view');
+  }), {threshold:.14, rootMargin:'0px 0px -5% 0px'});
+  $$('.reveal').forEach((el, i) => { if(!el.dataset.replay) el.dataset.replay = 'true'; el.style.setProperty('--reveal-index', String(i % 4)); observer.observe(el); });
+
+  // Motion graphics that respond to scrolling without adding a heavy animation library.
+  const progressBar = $('#scroll-progress-bar');
+  const pointerGlow = $('.pointer-glow');
+  let motionQueued = false;
+  function updateScrollMotion(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? window.scrollY / max : 0;
+    if(progressBar) progressBar.style.transform = `scaleX(${progress})`;
+    document.documentElement.style.setProperty('--scroll-progress', String(progress));
+    $$('.hero-art, .download-orb, .catalog-intro').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height/2 - window.innerHeight/2;
+      if(Math.abs(center) < window.innerHeight*1.2) el.style.setProperty('--scroll-shift', `${center * -0.035}px`);
+    });
+    motionQueued = false;
+  }
+  window.addEventListener('scroll', () => { if(!motionQueued){motionQueued=true;window.requestAnimationFrame(updateScrollMotion);} }, {passive:true});
+  window.addEventListener('resize', updateScrollMotion, {passive:true}); updateScrollMotion();
+  if(pointerGlow && !reducedMotion && window.matchMedia('(pointer:fine)').matches){
+    window.addEventListener('pointermove', e => { pointerGlow.style.setProperty('--pointer-x', `${e.clientX}px`); pointerGlow.style.setProperty('--pointer-y', `${e.clientY}px`); pointerGlow.classList.add('visible'); }, {passive:true});
+  }
+  if(!reducedMotion){
+    $$('.feature-card, .screen-card, .catalog-step, .about-profile, .web-player, .download-panel').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        if(!window.matchMedia('(pointer:fine)').matches) return;
+        const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+        card.style.setProperty('--tilt-x', `${(0.5-y)*3}deg`); card.style.setProperty('--tilt-y', `${(x-0.5)*3}deg`);
+      });
+      card.addEventListener('pointerleave', () => {card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');});
+    });
+  }
 
   function renderTrackList() {
     trackList.innerHTML = '';
