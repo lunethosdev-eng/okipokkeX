@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageButton = $('#language-toggle');
   const translations = {
     es: {
-      navExperience:'Experiencia',navCatalog:'Cómo funciona',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',
+      navExperience:'Experiencia',navCatalog:'Cómo funciona',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',navWeb:'Probar web',platformNote:'iOS, Windows y más plataformas: próximamente.',
       eyebrow:'UNA NUEVA FORMA DE ESCUCHAR',heroTitle:'Tu música.<br><span class="muted-heading">Tus reglas.</span>',
       heroBody:'Una experiencia musical diseñada para sentirse tuya. Descubre, organiza y reproduce tus canciones desde un espacio limpio, cuidado y sin distracciones.',
-      getApp:'Conoce Pokke',explore:'Explorar la experiencia',androidNote:'Diseñado para Android · APK',yourLibrary:'Tu biblioteca',alwaysYours:'Siempre a tu manera',soundOn:'El sonido, en primer plano',listenYourWay:'Escucha a tu ritmo',scroll:'DESCUBRE POKKE',
+      getApp:'Probar Pokke Web',explore:'Explorar la experiencia',androidNote:'Android available · iOS and Windows coming soon',yourLibrary:'Tu biblioteca',alwaysYours:'Siempre a tu manera',soundOn:'El sonido, en primer plano',listenYourWay:'Escucha a tu ritmo',scroll:'DESCUBRE POKKE',
       statementKicker:'MENOS RUIDO. MÁS MÚSICA.',statementTitle:'La música es el centro.<br><span class="serif">Todo lo demás, no.</span>',statementBody:'Pokke apuesta por una interfaz serena, controles claros y una experiencia que deja espacio para lo importante: lo que estás escuchando.',
       featuresKicker:'HECHO PARA ESCUCHAR',featuresTitle:'Una experiencia con intención.',featuresIntro:'Cada detalle tiene un propósito: hacer que escuchar música se sienta sencillo otra vez.',
       featureOneTitle:'Tu espacio musical',featureOneBody:'Una biblioteca visual, portadas protagonistas y una interfaz pensada para acompañarte.',featureTwoTitle:'Diseño que respira',featureTwoBody:'Transiciones suaves, superficies translúcidas y modos claro y oscuro para elegir tu ambiente.',featureThreeTitle:'En evolución',featureThreeBody:'Un proyecto independiente que crece con ideas, comentarios y nuevas versiones.',
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
       trackUnavailable:'Este archivo de audio está vacío o no se puede reproducir. Sustituye el MP3 de muestra por el archivo completo.',audioError:'No se pudo cargar el audio. Comprueba que el archivo exista y sea válido.',noReleases:'Todavía no hay lanzamientos publicados.',stable:'Estable',beta:'Beta',getApk:'Descargar APK',viewGithub:'Ver en GitHub',releaseFallback:'Consulta las versiones en GitHub Releases.',menuOpen:'Abrir menú',menuClose:'Cerrar menú'
     },
     en: {
-      navExperience:'Experience',navCatalog:'How it works',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',
+      navExperience:'Experience',navCatalog:'How it works',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',navWeb:'Try the web app',platformNote:'iOS, Windows, and more platforms: coming soon.',
       eyebrow:'A NEW WAY TO LISTEN',heroTitle:'Your music.<br><span class="muted-heading">Your rules.</span>',
       heroBody:'A music experience designed to feel like yours. Discover, organize, and play your songs in a clean, considered space without distractions.',
-      getApp:'Meet Pokke',explore:'Explore the experience',androidNote:'Designed for Android · APK',yourLibrary:'Your library',alwaysYours:'Always your way',soundOn:'Sound takes center stage',listenYourWay:'Listen at your pace',scroll:'DISCOVER POKKE',
+      getApp:'Try Pokke Web',explore:'Explore the experience',androidNote:'Android available · iOS and Windows coming soon',yourLibrary:'Your library',alwaysYours:'Always your way',soundOn:'Sound takes center stage',listenYourWay:'Listen at your pace',scroll:'DISCOVER POKKE',
       statementKicker:'LESS NOISE. MORE MUSIC.',statementTitle:'Music is the center.<br><span class="serif">Everything else is not.</span>',statementBody:'Pokke focuses on a calm interface, clear controls, and an experience that leaves room for what matters: what you are listening to.',
       featuresKicker:'MADE FOR LISTENING',featuresTitle:'An experience with intention.',featuresIntro:'Every detail has a purpose: making listening to music feel simple again.',
       featureOneTitle:'Your music space',featureOneBody:'A visual library, cover art in focus, and an interface designed to be with you.',featureTwoTitle:'A design that breathes',featureTwoBody:'Soft transitions, translucent surfaces, and light and dark modes to set your mood.',featureThreeTitle:'Always evolving',featureThreeBody:'An independent project growing through ideas, feedback, and new releases.',
