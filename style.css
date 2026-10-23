@@ -34,3 +34,6 @@
 @media(prefers-reduced-motion:reduce){.pointer-glow{display:none!important}.about-section:before{animation:none!important}.reveal{filter:none!important}.glass,.feature-card,.screen-card,.catalog-step,.about-profile,.web-player,.download-panel{transform:none!important}}
 /* Keep scroll reveal and subtle 3D hover motion composable on the same card. */
 .reveal.in-view{transform:perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(0)}
+/* Mobile header alignment and platform availability note */
+.platform-note{font-size:11px;color:var(--muted);margin:12px 0 0;letter-spacing:.01em}
+@media(max-width:650px){.nav-shell{left:9px;right:9px;width:auto;transform:none;justify-content:space-between;gap:8px}.nav-actions{margin-left:auto}.brand{flex:0 0 auto}.nav-cta{display:none}.hero-footnote{flex-wrap:wrap}.platform-note{font-size:10px;line-height:1.6}}
