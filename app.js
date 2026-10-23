@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageButton = $('#language-toggle');
   const translations = {
     es: {
-      navExperience:'Experiencia',navCatalog:'Cómo funciona',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',navWeb:'Probar web',platformNote:'iOS, Windows y más plataformas: próximamente.',installerKicker:'ACTUALIZACIONES',installerDownload:'Descargar instalador',installerPending:'Instalador universal: próximamente',platformKicker:'UNA EXPERIENCIA EN EXPANSIÓN',platformTitle:'Donde escuchas.',platformBody:'Pokke ya está disponible en Android y en la web. Estamos preparando el camino para más plataformas.',platformAvailable:'Disponible',platformTry:'Probar ahora ↗',platformSoon:'Próximamente',projectsKicker:'DEL TALLER',projectsTitle:'Lo que estamos construyendo.',projectsBody:'Proyectos públicos de GitHub, con sus descripciones originales actualizadas automáticamente desde GitHub.',projectsLoading:'Cargando proyectos de GitHub…',projectsAll:'Ver todos los repositorios',projectsEmpty:'No se encontraron repositorios públicos.',projectsError:'No se pudieron cargar los proyectos en este momento.',universalTitle:'Instalador universal',universalBody:'Si una actualización no se instala desde Google Files, prueba el instalador universal cuando esté publicado. Por ahora, puede ser necesario desinstalar la versión anterior antes de instalar la nueva. Estamos trabajando para que las actualizaciones futuras sean más sencillas.',discordJoin:'Unirse al Discord',
+      navExperience:'Experiencia',navCatalog:'Cómo funciona',navPreview:'Vista previa',navCommunity:'Comunidad',navAbout:'Nosotros',navDownload:'Descargar',navWeb:'Probar web',platformNote:'iOS, Windows y más plataformas: próximamente.',installerKicker:'ACTUALIZACIONES',installerDownload:'Descargar APK de terceros',installerPending:'APK de terceros: añade el archivo para habilitar la descarga',platformKicker:'UNA EXPERIENCIA EN EXPANSIÓN',platformTitle:'Donde escuchas.',platformBody:'Pokke ya está disponible en Android y en la web. Estamos preparando el camino para más plataformas.',platformAvailable:'Disponible',platformTry:'Probar ahora ↗',platformSoon:'Próximamente',universalTitle:'Instalador de terceros',universalBody:'Este APK es una herramienta de terceros y no ha sido creado por Pokke. Si decides usarlo, verifica su origen y úsalo bajo tu propia responsabilidad. Mientras tanto, algunas actualizaciones podrían requerir desinstalar la versión anterior antes de instalar la nueva; esperamos mejorar este proceso en el futuro.',discordJoin:'Unirse al Discord',
       eyebrow:'UNA NUEVA FORMA DE ESCUCHAR',heroTitle:'Tu música.<br><span class="muted-heading">Tus reglas.</span>',
       heroBody:'Una experiencia musical diseñada para sentirse tuya. Descubre, organiza y reproduce tus canciones desde un espacio limpio, cuidado y sin distracciones.',
       getApp:'Probar Pokke Web',explore:'Explorar la experiencia',androidNote:'Android available · iOS and Windows coming soon',yourLibrary:'Tu biblioteca',alwaysYours:'Siempre a tu manera',soundOn:'El sonido, en primer plano',listenYourWay:'Escucha a tu ritmo',scroll:'DESCUBRE POKKE',
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       trackUnavailable:'Este archivo de audio está vacío o no se puede reproducir. Sustituye el MP3 de muestra por el archivo completo.',audioError:'No se pudo cargar el audio. Comprueba que el archivo exista y sea válido.',noReleases:'Todavía no hay lanzamientos publicados.',stable:'Estable',beta:'Beta',getApk:'Descargar APK',viewGithub:'Ver en GitHub',releaseFallback:'Consulta las versiones en GitHub Releases.',menuOpen:'Abrir menú',menuClose:'Cerrar menú'
     },
     en: {
-      navExperience:'Experience',navCatalog:'How it works',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',navWeb:'Try the web app',platformNote:'iOS, Windows, and more platforms: coming soon.',installerKicker:'UPDATES',installerDownload:'Download installer',installerPending:'Universal installer: coming soon',platformKicker:'EXPANDING THE EXPERIENCE',platformTitle:'Where you listen.',platformBody:'Pokke is available on Android and the web. We are preparing the way for more platforms.',platformAvailable:'Available',platformTry:'Try it now ↗',platformSoon:'Coming soon',projectsKicker:'FROM THE WORKSHOP',projectsTitle:'What we are building.',projectsBody:'Public GitHub projects, with their original descriptions automatically refreshed from GitHub.',projectsLoading:'Loading GitHub projects…',projectsAll:'View all repositories',projectsEmpty:'No public repositories found.',projectsError:'Projects could not be loaded right now.',universalTitle:'Universal installer',universalBody:'If an update will not install through Google Files, try the universal installer once it is published. For now, you may need to uninstall the previous version before installing the new one. We are working to make future updates easier.',discordJoin:'Join the Discord',
+      navExperience:'Experience',navCatalog:'How it works',navPreview:'Preview',navCommunity:'Community',navAbout:'About',navDownload:'Download',navWeb:'Try the web app',platformNote:'iOS, Windows, and more platforms: coming soon.',installerKicker:'UPDATES',installerDownload:'Download third-party APK',installerPending:'Third-party APK: add the file to enable download',platformKicker:'EXPANDING THE EXPERIENCE',platformTitle:'Where you listen.',platformBody:'Pokke is available on Android and the web. We are preparing the way for more platforms.',platformAvailable:'Available',platformTry:'Try it now ↗',platformSoon:'Coming soon',universalTitle:'Third-party installer',universalBody:'This APK is a third-party tool and was not created by Pokke. If you choose to use it, verify its source and use it at your own risk. For now, some updates may require uninstalling the previous version before installing the new one; we hope to improve this process in the future.',discordJoin:'Join the Discord',
       eyebrow:'A NEW WAY TO LISTEN',heroTitle:'Your music.<br><span class="muted-heading">Your rules.</span>',
       heroBody:'A music experience designed to feel like yours. Discover, organize, and play your songs in a clean, considered space without distractions.',
       getApp:'Try Pokke Web',explore:'Explore the experience',androidNote:'Android available · iOS and Windows coming soon',yourLibrary:'Your library',alwaysYours:'Always your way',soundOn:'Sound takes center stage',listenYourWay:'Listen at your pace',scroll:'DISCOVER POKKE',
@@ -206,33 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  async function loadGithubProjects(){
-    const target=$('#github-projects'); if(!target)return;
-    try{
-      const res=await fetch('https://api.github.com/users/lunethosdev-eng/repos?type=public&sort=updated&per_page=100');
-      if(!res.ok) throw new Error('GitHub API unavailable');
-      const repos=(await res.json()).filter(r=>!r.fork && !r.archived).slice(0,8);
-      target.innerHTML='';
-      if(!repos.length){target.textContent=t('projectsEmpty');return;}
-      repos.forEach(repo=>{
-        const card=document.createElement('article');card.className='project-card glass reveal in-view';
-        const top=document.createElement('div');top.className='project-card-top';
-        const icon=document.createElement('span');icon.className='project-github-icon';icon.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 4v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.1-1.5 6.1-6.7a5.2 5.2 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.6S17.5.3 15 2.8a13.2 13.2 0 0 0-7 0C5.5.3 3.3 2.6 3.3 2.6a4.8 4.8 0 0 0-.1 3.6 5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.1 6.4 6.1 6.7A3.4 3.4 0 0 0 7 19v2"/></svg>';
-        const link=document.createElement('a');link.href=repo.html_url;link.target='_blank';link.rel='noopener noreferrer';link.className='project-open';link.textContent='↗';link.setAttribute('aria-label','Open '+repo.name);
-        top.append(icon,link);const name=document.createElement('h3');name.textContent=repo.name;
-        const desc=document.createElement('p');desc.textContent=repo.description||'No description added yet.';
-        const meta=document.createElement('div');meta.className='project-meta';if(repo.language){const lang=document.createElement('span');lang.textContent=repo.language;meta.appendChild(lang);}const updated=document.createElement('span');updated.textContent=(lang==='es'?'Actualizado ':'Updated ')+new Date(repo.updated_at).toLocaleDateString(lang==='es'?'es-SV':'en-US',{month:'short',day:'numeric',year:'numeric'});meta.appendChild(updated);
-        card.append(top,name,desc,meta);target.appendChild(card);
-      });
-    }catch(e){target.innerHTML='';const p=document.createElement('p');p.className='release-empty';p.textContent=t('projectsError');target.appendChild(p);}
-  }
   async function checkUniversalInstaller(){
     const link=$('#universal-installer-link'), pending=$('#installer-pending'); if(!link||!pending)return;
-    try{const r=await fetch('downloads/pokke-universal-installer.apk',{method:'HEAD',cache:'no-store'});if(r.ok){link.hidden=false;pending.hidden=true;}}catch(e){}
+    try{const r=await fetch('downloads/app.pwhs.universalinstaller_42.apk',{method:'HEAD',cache:'no-store'});if(r.ok){link.hidden=false;pending.hidden=true;}}catch(e){}
   }
 
   applyLanguage(lang);
   loadReleases();
-  loadGithubProjects();
   checkUniversalInstaller();
 });
