@@ -1,71 +1,74 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
     const repoOwner = "lunethosdev-eng";
     const repoName = "okipokkeX";
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
+    const releasesApi = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
 
-    const latestContainer = document.getElementById("latest-download-container");
-    const versionsList = document.getElementById("versions-list");
+    const latestTarget = document.getElementById("latest-release-target");
+    const releasesTarget = document.getElementById("releases-list");
 
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error("No se pudieron cargar los releases.");
-        
-        const releases = await response.json();
+    // Fetch GitHub Releases
+    async function loadReleases() {
+        try {
+            const res = await fetch(releasesApi);
+            if (!res.ok) throw new Error("Fetch failed");
+            const data = await res.json();
 
-        if (releases.length === 0) {
-            latestContainer.innerHTML = `<p class="loading-text">Pronto habrá releases disponibles.</p>`;
-            versionsList.innerHTML = `<p class="loading-text">No hay versiones registradas aún.</p>`;
-            return;
-        }
+            if (!data || data.length === 0) {
+                latestTarget.innerHTML = `<p style="color: var(--text-muted);">Sin versiones públicas registradas por ahora.</p>`;
+                releasesTarget.innerHTML = `<div class="version-row"><span style="color: var(--text-muted);">Sin historial disponible.</span></div>`;
+                return;
+            }
 
-        // Encontrar el último release estable (o el más reciente si no hay estables)
-        const latestRelease = releases[0];
-        
-        // Buscar el archivo .apk en los assets del release
-        const apkAsset = latestRelease.assets.find(asset => asset.name.endsWith(".apk"));
-        const downloadUrl = apkAsset ? apkAsset.browser_download_url : latestRelease.html_url;
+            // Primer elemento = release más reciente
+            const latest = data[0];
+            const apkAsset = latest.assets.find(a => a.name.endsWith(".apk"));
+            const downloadUrl = apkAsset ? apkAsset.browser_download_url : latest.html_url;
 
-        // Renderizar la sección de descarga principal
-        latestContainer.innerHTML = `
-            <a href="${downloadUrl}" class="btn btn-primary" target="_blank">
-                ⬇️ Descargar APK (${latestRelease.tag_name})
-            </a>
-            <a href="#versions" class="btn btn-secondary">Ver versiones anteriores</a>
-        `;
+            latestTarget.innerHTML = `
+                <a href="${downloadUrl}" class="btn btn-primary" target="_blank">Descargar ${latest.tag_name} (.APK)</a>
+            `;
 
-        // Renderizar la lista completa de versiones (viejas, betas, etc.)
-        versionsList.innerHTML = "";
-        releases.forEach(release => {
-            const isBeta = release.prerelease || release.tag_name.includes("beta") || release.tag_name.includes("alpha");
-            const apkFile = release.assets.find(asset => asset.name.endsWith(".apk"));
-            const fileUrl = apkFile ? apkFile.browser_download_url : release.html_url;
-            
-            const dateStr = new Date(release.published_at).toLocaleDateString("es-ES", {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
+            // Historial de Releases
+            releasesTarget.innerHTML = "";
+            data.forEach(rel => {
+                const isPrerelease = rel.prerelease || rel.tag_name.toLowerCase().includes("beta");
+                const fileAsset = rel.assets.find(a => a.name.endsWith(".apk"));
+                const link = fileAsset ? fileAsset.browser_download_url : rel.html_url;
+                const releaseDate = new Date(rel.published_at).toLocaleDateString("es-ES", {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                const row = document.createElement("div");
+                row.className = "version-row";
+                row.innerHTML = `
+                    <div class="v-meta">
+                        <span class="v-tag">${rel.tag_name}</span>
+                        ${isPrerelease ? '<span class="v-badge">Beta</span>' : '<span class="v-badge">Stable</span>'}
+                        <span class="v-date">${releaseDate}</span>
+                    </div>
+                    <a href="${link}" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.78rem;" target="_blank">Obtener APK</a>
+                `;
+                releasesTarget.appendChild(row);
             });
 
-            const versionElement = document.createElement("div");
-            versionElement.className = "version-item";
-            versionElement.innerHTML = `
-                <div class="version-info">
-                    <h4>
-                        ${release.name || release.tag_name} 
-                        ${isBeta ? '<span class="badge-beta">Beta</span>' : ''}
-                    </h4>
-                    <span>Publicado el ${dateStr}</span>
-                </div>
-                <a href="${fileUrl}" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;" target="_blank">
-                    Descargar
-                </a>
-            `;
-            versionsList.appendChild(versionElement);
-        });
-
-    } catch (error) {
-        console.error(error);
-        latestContainer.innerHTML = `<p class="loading-text">Error al conectar con GitHub Releases.</p>`;
-        versionsList.innerHTML = `<p class="loading-text">No se pudo cargar el historial.</p>`;
+        } catch (err) {
+            latestTarget.innerHTML = `<a href="https://github.com/${repoOwner}/${repoName}/releases" class="btn btn-primary" target="_blank">Ver Releases en GitHub</a>`;
+            releasesTarget.innerHTML = `<div class="version-row"><span style="color: var(--text-muted);">Consulta directa en GitHub Releases.</span></div>`;
+        }
     }
+
+    // Scroll Animations Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+    loadReleases();
 });
