@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokke - Tu música, sin límites</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts para tipografía estilo Apple (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Fondo con efecto difuminado sutil -->
+    <div class="bg-glow"></div>
+
+    <!-- Navegación -->
+    <header class="glass-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🎵</span>
+                <span class="logo-text">Pokke</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Características</a>
+                <a href="#download">Descargar</a>
+                <a href="#versions">Versiones</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">✨ 100% Libre de Anuncios</div>
+            <h1>La forma más pura de <span class="gradient-text">sentir la música</span>.</h1>
+            <p>Disfruta de tus canciones favoritas, descarga música sin conexión, personaliza tu perfil e importa tus playlists de Spotify de forma gratuita y sin interrupciones.</p>
+            
+            <div class="hero-buttons" id="hero-cta">
+                <!-- Se llena dinámicamente con la última release o APK -->
+                <a href="#download" class="btn btn-primary">Descargar APK</a>
+                <a href="#" class="btn btn-secondary" target="_blank" id="web-app-link">Abrir Web App</a>
+            </div>
+        </div>
+        <div class="hero-mockup">
+            <div class="glass-card mockup-card">
+                <div class="mockup-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mockup-body">
+                    <div class="album-art">🎶</div>
+                    <div class="track-info">
+                        <h3>Reproduciendo ahora</h3>
+                        <p>Tu música sin límites</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características Section -->
+    <section id="features" class="features">
+        <h2>Diseñado para amantes de la música</h2>
+        <p class="section-subtitle">Experiencia minimalista inspirada en la elegancia de Apple.</p>
+        
+        <div class="features-grid">
+            <div class="glass-card feature-item">
+                <div class="feature-icon">🚫</div>
+                <h3>Sin Anuncios</h3>
+                <p>Disfruta de tu contenido musical completamente limpio, sin cortes molestos ni publicidad invasiva.</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-icon">📥</div>
+                <h3>Descarga Libre</h3>
+                <p>Lleva tu música a donde vayas guardando tus pistas favoritas para escucharlas sin conexión.</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-icon">🔄</div>
+                <h3>Importa de Spotify</h3>
+                <p>Muda todas tus listas de reproducción favoritas con un par de clics de manera automática.</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-icon">👤</div>
+                <h3>Perfil Personalizable</h3>
+                <p>Dale tu propio estilo a tu cuenta y personaliza tu espacio de reproducción a tu gusto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descarga Section -->
+    <section id="download" class="download-section">
+        <div class="glass-card download-card">
+            <h2>Obtén Pokke ahora</h2>
+            <p>Disponible para Android (.apk) y compatible con Web (ideal para iPhone y otras plataformas).</p>
+            
+            <div class="download-options" id="latest-download-container">
+                <!-- Cargado mediante JavaScript -->
+                <p class="loading-text">Buscando última versión disponible...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Versiones y Archivo Section -->
+    <section id="versions" class="versions-section">
+        <h2>Historial de Versiones</h2>
+        <p class="section-subtitle">¿Buscas una versión anterior o una compilación Beta? Encuéntralas todas aquí.</p>
+        
+        <div class="versions-container" id="versions-list">
+            <p class="loading-text">Cargando historial de releases...</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Pokke. Creado con ❤️ por lunethosdev-eng.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
