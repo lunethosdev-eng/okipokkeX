@@ -1,387 +1,74 @@
-:root {
-    --bg-color: #0b0b0f;
-    --text-primary: #f5f5f7;
-    --text-secondary: #86868b;
-    --accent: #2997ff;
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-hover: rgba(255, 255, 255, 0.08);
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const repoOwner = "lunethosdev-eng";
+    const repoName = "okipokkeX";
+    const releasesApi = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    const latestTarget = document.getElementById("latest-release-target");
+    const releasesTarget = document.getElementById("releases-list");
 
-html {
-    scroll-behavior: smooth;
-}
+    // Fetch GitHub Releases
+    async function loadReleases() {
+        try {
+            const res = await fetch(releasesApi);
+            if (!res.ok) throw new Error("Fetch failed");
+            const data = await res.json();
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    font-family: var(--font-family);
-    overflow-x: hidden;
-    position: relative;
-    line-height: 1.5;
-}
+            if (!data || data.length === 0) {
+                latestTarget.innerHTML = `<p style="color: var(--text-muted);">Sin versiones públicas registradas por ahora.</p>`;
+                releasesTarget.innerHTML = `<div class="version-row"><span style="color: var(--text-muted);">Sin historial disponible.</span></div>`;
+                return;
+            }
 
-/* Fondo difuminado sutil estilo Apple */
-.bg-glow {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(41, 151, 255, 0.12) 0%, rgba(11, 11, 15, 0) 70%);
-    z-index: -1;
-    pointer-events: none;
-}
+            // Primer elemento = release más reciente
+            const latest = data[0];
+            const apkAsset = latest.assets.find(a => a.name.endsWith(".apk"));
+            const downloadUrl = apkAsset ? apkAsset.browser_download_url : latest.html_url;
 
-/* Efectos Glassmorphism */
-.glass-nav, .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-}
+            latestTarget.innerHTML = `
+                <a href="${downloadUrl}" class="btn btn-primary" target="_blank">Descargar ${latest.tag_name} (.APK)</a>
+            `;
 
-/* Navegación */
-.glass-nav {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1100px;
-    z-index: 1000;
-    border-radius: 16px;
-    padding: 12px 24px;
-}
+            // Historial de Releases
+            releasesTarget.innerHTML = "";
+            data.forEach(rel => {
+                const isPrerelease = rel.prerelease || rel.tag_name.toLowerCase().includes("beta");
+                const fileAsset = rel.assets.find(a => a.name.endsWith(".apk"));
+                const link = fileAsset ? fileAsset.browser_download_url : rel.html_url;
+                const releaseDate = new Date(rel.published_at).toLocaleDateString("es-ES", {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+                const row = document.createElement("div");
+                row.className = "version-row";
+                row.innerHTML = `
+                    <div class="v-meta">
+                        <span class="v-tag">${rel.tag_name}</span>
+                        ${isPrerelease ? '<span class="v-badge">Beta</span>' : '<span class="v-badge">Stable</span>'}
+                        <span class="v-date">${releaseDate}</span>
+                    </div>
+                    <a href="${link}" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.78rem;" target="_blank">Obtener APK</a>
+                `;
+                releasesTarget.appendChild(row);
+            });
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
+        } catch (err) {
+            latestTarget.innerHTML = `<a href="https://github.com/${repoOwner}/${repoName}/releases" class="btn btn-primary" target="_blank">Ver Releases en GitHub</a>`;
+            releasesTarget.innerHTML = `<div class="version-row"><span style="color: var(--text-muted);">Consulta directa en GitHub Releases.</span></div>`;
+        }
+    }
 
-.nav-links {
-    display: flex;
-    gap: 24px;
-}
+    // Scroll Animations Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.1 });
 
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-.nav-links a:hover {
-    color: var(--text-primary);
-}
-
-/* Hero Section */
-.hero {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 140px 10% 60px 10%;
-    max-width: 1300px;
-    margin: 0 auto;
-    gap: 40px;
-}
-
-.hero-content {
-    flex: 1;
-}
-
-.badge {
-    display: inline-block;
-    padding: 6px 14px;
-    background: rgba(41, 151, 255, 0.1);
-    color: var(--accent);
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 20px;
-    border: 1px solid rgba(41, 151, 255, 0.2);
-}
-
-.hero h1 {
-    font-size: 3.2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    line-height: 1.1;
-}
-
-.gradient-text {
-    background: linear-gradient(135deg, #ffffff 30%, #86868b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    max-width: 500px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 16px;
-}
-
-/* Botones */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.btn-primary {
-    background-color: var(--text-primary);
-    color: var(--bg-color);
-}
-
-.btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background: var(--glass-bg);
-    color: var(--text-primary);
-    border: 1px solid var(--glass-border);
-}
-
-.btn-secondary:hover {
-    background: var(--glass-hover);
-    transform: translateY(-2px);
-}
-
-/* Mockup Visual */
-.hero-mockup {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.mockup-card {
-    width: 320px;
-    padding: 24px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.mockup-header {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 20px;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-.dot.red { background-color: #ff5f56; }
-.dot.yellow { background-color: #ffbd2e; }
-.dot.green { background-color: #27c93f; }
-
-.album-art {
-    width: 140px;
-    height: 140px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    margin: 0 auto 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
-
-.track-info h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.track-info p {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-/* Características Section */
-.features {
-    padding: 80px 10%;
-    max-width: 1300px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.features h2, .versions-section h2 {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    letter-spacing: -0.01em;
-}
-
-.section-subtitle {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin-bottom: 50px;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    text-align: left;
-}
-
-.feature-item {
-    padding: 30px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.feature-item:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.feature-icon {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-}
-
-.feature-item h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.feature-item p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-/* Descarga Section */
-.download-section {
-    padding: 60px 10%;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.download-card {
-    padding: 40px;
-    text-align: center;
-}
-
-.download-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.download-card p {
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-}
-
-.download-options {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-/* Versiones Section */
-.versions-section {
-    padding: 80px 10%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.versions-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.version-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    border-radius: 12px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    transition: background 0.2s ease;
-}
-
-.version-item:hover {
-    background: var(--glass-hover);
-}
-
-.version-info h4 {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.version-info span {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.badge-beta {
-    background: rgba(255, 189, 46, 0.1);
-    color: #ffbd2e;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    margin-left: 8px;
-    border: 1px solid rgba(255, 189, 46, 0.2);
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 40px;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--glass-border);
-    margin-top: 60px;
-}
-
-.loading-text {
-    color: var(--text-secondary);
-    font-style: italic;
-}
+    loadReleases();
+});
