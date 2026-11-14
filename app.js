@@ -182,9 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
     try{
       const response=await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
       if(!response.ok)throw new Error('GitHub releases unavailable');
-      const releases=await response.json();
+      const releases=await response.json();window.dispatchEvent(new CustomEvent('pokke:releases',{detail:releases}));
       if(!releases.length){list.innerHTML=`<p class="release-empty">${t('noReleases')}</p>`;return;}
-      const latest=releases[0], apk=latest.assets.find(asset=>asset.name.toLowerCase().endsWith('.apk'));
+      const latest=releases[0], apk=latest.assets.find(asset=>/\.apk$/i.test(asset.name)&&!/tv/i.test(asset.name));
       latestTarget.innerHTML='';
       const label=document.createElement('span');label.className='loading-line';label.textContent=latest.tag_name+(apk?' · APK':'');latestTarget.appendChild(label);
       const link=document.createElement('a');link.className='button button-dark';link.href=apk?apk.browser_download_url:latest.html_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=apk?t('getApk'):t('viewGithub');latestTarget.appendChild(link);
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const badge=document.createElement('span');badge.className='release-badge';badge.textContent=(release.prerelease||/beta|alpha/i.test(release.tag_name))?t('beta'):t('stable');
         const date=document.createElement('span');date.className='release-date';date.textContent=new Date(release.published_at).toLocaleDateString(lang==='es'?'es-SV':'en-US',{year:'numeric',month:'short',day:'numeric'});
         meta.append(tag,badge,date);
-        const a=document.createElement('a');a.className='release-link';a.href=release.assets.find(asset=>asset.name.toLowerCase().endsWith('.apk'))?.browser_download_url||release.html_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=t('getApk');
+        const a=document.createElement('a');a.className='release-link';a.href=release.assets.find(asset=>/\.apk$/i.test(asset.name)&&!/tv/i.test(asset.name))?.browser_download_url||release.html_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=t('getApk');
         row.append(meta,a);list.appendChild(row);
       });
     }catch(error){
