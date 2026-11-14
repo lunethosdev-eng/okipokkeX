@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Developers — Pokke</title>
+<link rel="icon" href="assets/pokke-logo-rounded.png"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="extras.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head>
+<body><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="nav-shell glass"><a class="brand" href="index.html"><img src="assets/pokke-logo-rounded.png" alt="" class="brand-mark"><span>pokke<span class="brand-period">.</span></span></a>
+<nav class="nav-links"><a href="index.html#experience">Experiencia</a><a href="plugins.html">Plugins</a><a href="index.html#tv">Android TV</a><a href="terms.html">Términos</a><a href="dev.html">Developers</a></nav>
+<div class="nav-actions"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg></button><a class="nav-cta" href="dev.html">Developers</a></div>
+<button class="mobile-menu" id="mobile-menu" type="button" aria-label="Abrir menú"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></header>
+<main class="sub-main"><p class="section-kicker rv">DEVELOPERS</p><h1 class="rv">Portal de desarrolladores.</h1><p class="lede rv">Inicia sesión con tu cuenta de Pokke (o créala), acepta las reglas y publica tus plugins.</p>
+<section id="auth" class="card glass rv" style="max-width:420px;margin-top:30px"><div class="plug-tools" style="margin:0 0 14px"><button class="chip on" data-mode="in" type="button">Entrar</button><button class="chip" data-mode="up" type="button">Registrarme</button></div>
+<form id="auth-form" class="form"><input id="email" type="email" placeholder="Correo" autocomplete="email" required><input id="pass" type="password" placeholder="Contraseña (mín. 6)" minlength="6" autocomplete="current-password" required><button id="auth-go" class="button button-dark" type="submit">Entrar</button></form></section>
+<div id="dash" hidden><div class="dash-top rv on"><span id="who" class="tag"></span><span id="badge" class="tag dev-badge" hidden>{ } DEV</span><button id="logout" class="chip" type="button" style="height:36px">Salir</button></div>
+<section id="gate" class="card glass" hidden><h2>Activa tu cuenta de desarrollador</h2><p class="lede" style="font-size:13px">Para publicar debes aceptar estas reglas. Recibirás el emblema Dev en tu perfil de la app.</p>
+<label class="chk"><input type="checkbox" class="req"> Acepto los <a class="ulink" href="terms.html" target="_blank">términos de uso y copyright</a>.</label>
+<label class="chk"><input type="checkbox" class="req"> Mi plugin no contiene spyware, malware, rastreadores ni robo de datos, y no suplanta a nadie.</label>
+<label class="chk"><input type="checkbox" class="req"> Solo publico contenido propio o con licencia.</label>
+<label class="chk"><input type="checkbox" class="req"> Acepto que mi código se revise automáticamente y con IA, y que pueda ser rechazado o retirado.</label>
+<button id="accept" class="button button-dark" type="button" disabled>Activar cuenta de desarrollador</button></section>
+<div id="dev" hidden><section class="card glass"><h2>Publicar plugin</h2><form id="pub" class="form"><div class="row"><input name="id" placeholder="id (ej. community.neon-night)" required><input name="ver" placeholder="Versión (1.0.0)" pattern="[0-9]+\.[0-9]+\.[0-9]+" required></div><input name="name" placeholder="Nombre" minlength="2" maxlength="80" required><textarea name="desc" placeholder="Descripción" maxlength="2000" rows="3"></textarea>
+<select name="cat"><option value="theme">Tema</option><option value="widget">Widget</option><option value="feature">Función</option><option value="utility">Utilidad</option></select>
+<label class="file">Icono (PNG/JPG/WEBP, máx. 512 KB)<input name="icon" type="file" accept="image/png,image/jpeg,image/webp" required></label><label class="file">Paquete ZIP (máx. 2 MB)<input name="zip" type="file" accept=".zip" required></label><input name="log" placeholder="Novedades (opcional)" maxlength="500">
+<button class="button button-dark" type="submit">Subir y verificar</button></form><p id="msg" class="warn" hidden></p></section>
+<section class="card glass"><h2>Mis plugins</h2><div id="mine"></div></section>
+<details class="card glass"><summary><b>Documentación</b></summary><p class="lede" style="font-size:13px">Los paquetes son <b>declarativos</b>: un ZIP con <code>plugin.json</code> en la raíz y, opcionalmente, <code>README.md</code> y <code>assets/</code> (png, jpg, webp, json, txt). No se permite código ejecutable.</p><pre class="code">{
+  "id": "community.neon-night",
+  "name": "Neon Night",
+  "version": "1.0.0",
+  "description": "Tema oscuro",
+  "author": "Tu nombre",
+  "type": "theme",
+  "minAppVersion": "1.0.0",
+  "permissions": ["ui.theme", "ui.home_widgets"],
+  "ui": { "theme": { "accentColor": "#A78BFA", "backgroundColor": "#09090B", "cornerRadiusDp": 18 },
+    "homeCards": [{ "title": "Neon Mix", "subtitle": "Ejemplo", "icon": "music", "action": "open:search" }] }
+}</pre><ul class="pm-steps"><li><code>id</code> y <code>version</code> deben coincidir con el formulario.</li><li>Permisos permitidos: <code>ui.theme</code>, <code>ui.home_widgets</code>, <code>ui.icons</code>.</li><li>Acciones: solo <code>open:&lt;pantalla&gt;</code>. Sin URLs en <code>plugin.json</code>.</li><li>Revisión: análisis automático + 2 IAs. Si ambas lo aprueban se publica; si hay dudas queda en revisión manual.</li></ul></details></div></div></main>
+<footer class="footer"><a class="brand footer-brand" href="index.html"><img src="assets/pokke-logo-rounded.png" alt="" class="brand-mark"><span>pokke<span class="brand-period">.</span></span></a><p>Hecho con intención por Nakama Studio.</p><div class="footer-links"><a href="plugins.html">Plugins</a><a href="terms.html">Términos y copyright</a></div><span class="copyright">© <span id="year"></span> POKKE</span></footer>
+<script src="extras.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script><script src="config.js"></script><script src="dev.js"></script></body></html>
