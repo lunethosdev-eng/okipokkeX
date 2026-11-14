@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Plugins — Pokke</title>
+<link rel="icon" href="assets/pokke-logo-rounded.png"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="extras.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head>
+<body><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="nav-shell glass"><a class="brand" href="index.html"><img src="assets/pokke-logo-rounded.png" alt="" class="brand-mark"><span>pokke<span class="brand-period">.</span></span></a>
+<nav class="nav-links"><a href="index.html#experience">Experiencia</a><a href="plugins.html">Plugins</a><a href="index.html#tv">Android TV</a><a href="terms.html">Términos</a></nav>
+<div class="nav-actions"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg></button><a class="nav-cta" href="index.html#download">Descargar</a></div>
+<button class="mobile-menu" id="mobile-menu" type="button" aria-label="Abrir menú"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></header>
+<main class="sub-main"><p class="section-kicker rv">PLUGINS</p><h1 class="rv">Amplía Pokke.</h1><p class="lede rv">Descarga plugins como ZIP e impórtalos a mano, o ábrelos directo en la app si ya la tienes instalada.</p>
+<div class="plug-tools rv"><input id="plug-q" type="search" placeholder="Buscar plugins…" aria-label="Buscar"><button class="chip on" data-cat="all">Todos</button><button class="chip" data-cat="ui">Interfaz</button><button class="chip" data-cat="audio">Audio</button><button class="chip" data-cat="tv">TV</button></div>
+<div class="plug-grid" id="plug-grid"></div><p class="warn rv">Los plugins son de terceros y ejecutan código dentro de la app. Instala solo los que vengan de autores en los que confíes.</p></main>
+<footer class="footer"><a class="brand footer-brand" href="index.html"><img src="assets/pokke-logo-rounded.png" alt="" class="brand-mark"><span>pokke<span class="brand-period">.</span></span></a><p>Hecho con intención por Nakama Studio.</p><div class="footer-links"><a href="plugins.html">Plugins</a><a href="terms.html">Términos y copyright</a></div><span class="copyright">© <span id="year"></span> POKKE</span></footer>
+<div class="pm" id="pm" hidden role="dialog" aria-modal="true" aria-labelledby="pm-title"><div class="pm-box"><button class="chip pm-close" id="pm-close" type="button" aria-label="Cerrar">×</button><span class="tag" id="pm-ver"></span><h2 id="pm-title"></h2><p class="lede" style="font-size:13px;margin:0">Elige cómo instalarlo:</p>
+<a class="pm-opt" id="pm-app" href="#"><span class="pm-ico">↗</span><span><b>Abrir en Pokke</b><small>Se importa automáticamente si tienes la app instalada.</small></span></a>
+<a class="pm-opt" id="pm-zip" href="#" download><span class="pm-ico">↓</span><span><b>Descargar como ZIP</b><small>Impórtalo manualmente desde la app.</small></span></a>
+<div id="pm-help" hidden><p class="warn" id="pm-miss" hidden>Pokke no respondió. Descarga el ZIP e impórtalo manualmente:</p><ol class="pm-steps"><li>Guarda el ZIP sin descomprimirlo.</li><li>Abre Pokke → Ajustes → Plugins.</li><li>Toca «Importar plugin» y elige el ZIP.</li></ol></div>
+<p class="warn">Instala solo plugins en los que confíes.</p></div></div><script src="extras.js"></script></body></html>
