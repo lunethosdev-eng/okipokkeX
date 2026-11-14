@@ -33,6 +33,7 @@ const grid=$('#plug-grid');if(grid){let data=[],cat='all',q='',timer;const pm=$(
   $('#pm-app').onclick=ev=>{ev.preventDefault();cnt(p);clearTimeout(timer);location.href=`pokke://plugin/install?id=${encodeURIComponent(p.id)}&url=${encodeURIComponent(url)}`;
    timer=setTimeout(()=>{if(!document.hidden){$('#pm-miss').hidden=false;$('#pm-help').hidden=false}},1800)};
   $('#pm-zip').onclick=()=>{cnt(p);$('#pm-miss').hidden=true;$('#pm-help').hidden=false};
+  $('#pm-oldwrap').hidden=true;fetch(`${POKKE.url}/rest/v1/plugin_versions?select=version,package_url&plugin_id=eq.${encodeURIComponent(p.id)}&status=eq.published&order=created_at.desc`,{headers:{apikey:POKKE.key}}).then(r=>r.json()).then(vs=>{if(!Array.isArray(vs)||vs.length<2)return;$('#pm-old').innerHTML=vs.map((v,i)=>`<li><b>v${esc(v.version)}</b>${i?'':' <span class="tag">actual</span>'} · <a class="ulink" href="${esc(v.package_url)}" download>ZIP</a></li>`).join('');$('#pm-oldwrap').hidden=false}).catch(()=>{});
   pm.hidden=false;document.body.style.overflow='hidden';$('#pm-close').focus()});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer)});
  $('#pm-close').addEventListener('click',close);pm.addEventListener('click',e=>{if(e.target===pm)close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&!pm.hidden)close()});}
