@@ -2,7 +2,7 @@
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cmpv=(a,b)=>{const x=a.split(/[.+-]/).slice(0,3).map(Number),y=b.split(/[.+-]/).slice(0,3).map(Number);for(let i=0;i<3;i++)if((x[i]||0)!==(y[i]||0))return(x[i]||0)>(y[i]||0)?1:-1;return 0};
 const msg=(t,bad)=>{const m=$('#msg');m.textContent=t;m.hidden=!t;m.style.color=bad?'#d4493e':''};
-const STEPS=[['upload','Subiendo archivos'],['register','Registrando el plugin'],['fetch','Descargando el paquete'],['hash','Comprobando integridad (SHA-256)'],['scan','Analizando archivos y manifiesto'],['groq','Revisión con IA · Groq'],['openrouter','Revisión con IA · OpenRouter'],['decide','Decisión final']];
+const STEPS=[['upload','Subiendo archivos'],['register','Registrando el plugin'],['fetch','Descargando el paquete'],['hash','Comprobando integridad (SHA-256)'],['scan','Analizando archivos y manifiesto'],['groq','Revisión con IA · Groq'],['openrouter','Revisión con IA · OpenRouter'],['decide','Decisión final'],['notify','Aviso al revisor (correo)']];
 let cur=null;
 const initSteps=()=>{const o=$('#steps');o.hidden=false;o.innerHTML=STEPS.map(([k,l])=>`<li data-s="${k}"><i></i><span>${l}<small></small></span></li>`).join('')};
 const step=(k,st,d)=>{const li=$(`#steps [data-s="${k}"]`);if(!li)return;li.className=st;if(st==='run')cur=k;if(d!=null)li.querySelector('small').textContent=d};
@@ -53,7 +53,7 @@ $('#pub').onsubmit=async e=>{e.preventDefault();const form=e.target,f=new FormDa
   for(;;){const {done,value}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;
    while((i=buf.indexOf('\n'))>=0){const l=buf.slice(0,i).trim();buf=buf.slice(i+1);if(!l)continue;const m=JSON.parse(l);if(m.error)throw new Error(m.error);if(m.step)step(m.step,m.state,m.detail);if(m.done)fin=m}}
   if(!fin)throw new Error('La revisión terminó sin resultado.');
-  msg(fin.status==='published'?(upd?'✅ Nueva versión publicada.':'✅ Aprobado y publicado.'):fin.status==='rejected'?'❌ Rechazado: '+(why(fin.review)||'revisión de IA'):'⏳ Quedó en revisión manual; la versión actual sigue publicada.',fin.status==='rejected');
+  msg(fin.status==='published'?(upd?'✅ Nueva versión publicada.':'✅ Aprobado y publicado.'):fin.status==='rejected'?'❌ Rechazado: '+(why(fin.review)||'revisión de IA'):(upd?'⏳ Quedó en revisión manual; la versión actual sigue publicada.':'⏳ Quedó en revisión manual. Se publicará cuando se apruebe.'),fin.status==='rejected');
   form.reset();list(u)}
  catch(x){if(cur)step(cur,'fail');msg(x.message||String(x),1)}
  btn.disabled=false};
